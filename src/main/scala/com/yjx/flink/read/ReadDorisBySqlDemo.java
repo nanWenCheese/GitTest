@@ -1,0 +1,37 @@
+package com.yjx.flink.read;
+
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.table.api.Table;
+import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
+
+/**
+ * @author zhang
+ * @time 9/12/2025 下午4:29
+ * @description
+ */
+public class ReadDorisBySqlDemo {
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();
+        StreamTableEnvironment tableEnvironment = StreamTableEnvironment.create(environment);
+        String createTableSql = "CREATE TABLE flink_doris_source(\n" +
+                "EMPNO int,\n" +
+                "ENAME VARCHAR(255),\n" +
+                "JOB VARCHAR(255),\n" +
+                "MGR int,\n" +
+                "HIREDATE date,\n" +
+                "SAL decimal(10,0),\n" +
+                "COMM decimal(10,0),\n" +
+                "DEPTNO int\n" +
+                ")\n" +
+                "WITH(\n" +
+                "'connector'='doris',\n" +
+                "'fenodes'='node01:8030',\n" +
+                "'table.identifier'='scott.emp',\n" +
+                "'username'='root',\n" +
+                "'password'='123456'\n" +
+                ");";
+        tableEnvironment.executeSql(createTableSql);
+        Table table = tableEnvironment.sqlQuery("SELECT * FROM flink_doris_source");
+        table.execute().print();
+    }
+}
