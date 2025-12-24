@@ -11,6 +11,7 @@ import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
  */
 public class WriteDorisBySqlDemo {
     public static void main(String[] args) throws Exception {
+        System.out.println("Hello World!");
         StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();
         StreamTableEnvironment tableEnvironment = StreamTableEnvironment.create(environment);
         String createTableSql = "CREATE TABLE flink_doris_source(\n" +
