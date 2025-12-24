@@ -13,6 +13,7 @@ public class WriteDorisBySqlDemo {
     public static void main(String[] args) throws Exception {
         System.out.println("Hello World!");
         System.out.println("hotfix - bug already hotfix!");
+        System.out.println("dev update");
         System.out.println("master update");
         StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();
         StreamTableEnvironment tableEnvironment = StreamTableEnvironment.create(environment);
